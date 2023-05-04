@@ -12,15 +12,24 @@ def battle(pokemon1, pokemon2):
     print("Let the Pokemon battle begin! ================")
     print("It's " + pokemon1['name'] + " vs " + pokemon2['name'])
 
+    p1_stat = 0
+    p2_stat = 0
     for stat in ['hp', 'attack', 'defense', 'speed', 'sp_attack', 'sp_defense']:
         if pokemon1[stat] > pokemon2[stat]:
+            p1_stat += 1
             print(pokemon1['name'] + " has the advantage in " + stat)
         elif pokemon2[stat] > pokemon1[stat]:
+            p2_stat += 1
             print(pokemon2['name'] + "'s " + stat + " is superior")
+        else:
+            print(pokemon1['name'] + "'s " + stat + " and " + pokemon2['name'] + "'s " + stat + " is the same!")
 
-    winner = random.randrange(2)
-    if winner == 0: print("Battle results: " + pokemon1['name'])
-    if winner == 1: print("Battle results: " + pokemon2['name'])
+    if p1_stat > p2_stat:
+        print(pokemon1['name'] + " wins with " + str(p1_stat) + " stats!")
+    elif p2_stat > p1_stat:
+        print(pokemon2['name'] + " wins with " + str(p2_stat) + " stats!")
+    else:
+        print("The battle is a tie!")
 
 def main():
     # Fetch two pokemon from the MongoDB database
